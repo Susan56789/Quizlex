@@ -51,7 +51,6 @@ playAgain = () =>{
         </div>
         {
           this.state.questionBank.length > 0 &&
-         
           this.state.questionBank.map(({question, answers, correct, questionId}) =>(
             <QuestionBox
             question={question}
