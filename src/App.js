@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './assets/style.css';
 import quizService from './quizService';
+import QuestionBox from './components/QuestionBox';
 
  class App extends Component {
 
@@ -27,8 +28,13 @@ import quizService from './quizService';
           <h3>Quizlex</h3>
         </div>
         {
-          this.state.questionBank.length > 0 && this.state.questionBank.map(({question, answers, correct, questionId}) =>
-            <h4>{question}</h4>
+          this.state.questionBank.length > 0 && this.state.questionBank.map(({question, answers, correct, questionId}) =>(
+            <QuestionBox
+            question={question}
+            options={answers}
+            key={questionId}
+            />
+          )
           )
         }
 
