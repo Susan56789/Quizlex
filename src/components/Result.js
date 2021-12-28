@@ -9,4 +9,5 @@ const Result = ({score, playAgain}) => (
   </div>
 );
 
+
 export default Result;
