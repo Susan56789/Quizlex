@@ -6,7 +6,9 @@ import QuestionBox from './components/QuestionBox';
  class App extends Component {
 
   state ={
-    questionBank: []
+    questionBank: [],
+    score:0,
+    responses:0
   };
 
   getQuestions = () =>{
@@ -16,6 +18,17 @@ import QuestionBox from './components/QuestionBox';
       });
     });
   };
+
+computeAnswer = (answer, correctAnswer)=>{
+  if(answer === correctAnswer){
+     this.setState({
+       score: this.state.score +1
+     })
+  }
+  this.setState({
+    responses: this.state.responses < 5 ? this.responses +1 : 5
+  })
+}
 
   componentDidMount(){
     this.getQuestions();
@@ -28,16 +41,19 @@ import QuestionBox from './components/QuestionBox';
           <h3>Quizlex</h3>
         </div>
         {
-          this.state.questionBank.length > 0 && this.state.questionBank.map(({question, answers, correct, questionId}) =>(
+          this.state.questionBank.length > 0 &&
+          this.state.responses <5 &&
+          this.state.questionBank.map(({question, answers, correct, questionId}) =>(
             <QuestionBox
             question={question}
             options={answers}
             key={questionId}
+            selected={answer =>this.computeAnswer(answer,correct )}
             />
           )
           )
         }
-
+        {this.state.responses === 5 ? (<h2>{this.state.score}</h2>) : null}
       </div>
     );
   }
